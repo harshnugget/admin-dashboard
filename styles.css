@@ -27,7 +27,7 @@ h6 {
 header {
     font-size: clamp(0.85em, 1.5vw, 1em);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: max-content 1fr;
     align-items: center;
     margin: 0 3rem 0 3rem;
 }
@@ -62,21 +62,27 @@ main {
     font-size: clamp(0.85em, 1.5vw, 1em);
     display: grid;
     grid-template-columns: 2.5fr 1fr;
+    grid-template-rows: 750px;  /* Fix height of side-panel */
     background-color: rgb(211, 211, 211);
     padding: 20px;
     gap: 20px;
     overflow: auto;
 }
 
-.cards {
-    height: 750px;
+.cards-container {
+    min-height: 750px;
+}
+
+.cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: min-content;
+    grid-auto-rows: 1fr;
+    min-height: 100%;
     gap: 18px;
 }
 
-.cards h2:first-of-type {
+.cards-grid h2:first-of-type {
     grid-area: 1 / 1 / 1 / -1;
 }
 
@@ -87,8 +93,6 @@ main {
 .side-panel {
     display: grid;
     grid-template-rows: max-content 1fr max-content 1fr;
-    min-height: 750px;
-    max-height: 750px;
     gap: 18px;
 }
 
@@ -124,11 +128,12 @@ main {
         grid-template-rows: min-content 1fr;
         grid-area: 2 / 1 / -1 / -1;
     }
-    .cards {
+    .cards-container {
         height: min-content;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        grid-auto-rows: 1fr;
         grid-area: 2 / 1 / 2 / -1;
+    }
+    .cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
     .side-panel {
         display: grid;
