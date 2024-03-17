@@ -36,17 +36,28 @@
             </ul>
         </div>
 
-        <header>  
-            <input type="text" placeholder="Search.." name="search">
-            <p class="user-profile">Morgan Oakley</p>
+        <header>
+            <div class="search-bar">
+                <input type="text" placeholder="Search.." name="search">
+            </div>
+            <div class="user-profile">
+                <div class="user-img">
+                    img
+                </div>
+                <p>Morgan Oakley</p>
+            </div>
             <div class="welcome-user">
+                <div class="user-img">
+                    img
+                </div>
                 <h3>Hi there,</h3>
-                <h1>Morgan Oakley (@morgan)</h1>
+                <h1>Morgan Oakley</h1>
+                <h1>(@morgan)</h1>
             </div>
             <nav>
-                <a href="">New</a>
-                <a href="">Upload</a>
-                <a href="">Share</a>
+                <button type="button">New</button>
+                <button type="button">Upload</button>
+                <button type="button">Share</button>
                 <div class="dashboard-icon">
                     <label for="toggle-dashboard">Toggle Dash</label>
                 </div>
@@ -83,24 +94,26 @@
                     </div>
                 </div>
             </div>
-            <div class="side-panel">
-                <h2>Announcements</h2>
-                <div class="announcements side-panel-box">
-                    <h4>Announcement 1</h4>
-                    <p>Write a paragraph here...</p>
-                    <h4>Announcement 2</h4>
-                    <p>Write a paragraph here...</p>
-                    <h4>Announcement 3</h4>
-                    <p>Write a paragraph here...</p>
-                </div>
-                <h2>Trending</h2>
-                <div class="trending side-panel-box">
-                    <h4>@name</h4>
-                    <p>Descriptor</p>
-                    <h4>@name</h4>
-                    <p>Descriptor</p>
-                    <h4>@name</h4>
-                    <p>Descriptor</p>
+            <div class="side-panel-container">
+                <div class="side-panel-grid">
+                    <h2>Announcements</h2>
+                    <div class="announcements side-panel-box">
+                        <h4>Announcement 1</h4>
+                        <p>Write a paragraph here...</p>
+                        <h4>Announcement 2</h4>
+                        <p>Write a paragraph here...</p>
+                        <h4>Announcement 3</h4>
+                        <p>Write a paragraph here...</p>
+                    </div>
+                    <h2>Trending</h2>
+                    <div class="trending side-panel-box">
+                        <h4>@name</h4>
+                        <p>Descriptor</p>
+                        <h4>@name</h4>
+                        <p>Descriptor</p>
+                        <h4>@name</h4>
+                        <p>Descriptor</p>
+                    </div>
                 </div>
             </div>
         </main>

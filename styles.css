@@ -3,108 +3,178 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    overflow: auto;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
     margin: 0;
     padding: 0;
 }
 
 .container {
     display: grid;
-    grid-template-columns: minmax(280px, 1fr) 4fr;
+    grid-template-columns: max-content 4fr;
     grid-template-rows: min-content 1fr;
-    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    grid-template-areas:
+        "dashboard header"
+        "dashboard main";
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.637);
     height: 100vh;
-    margin: 0 5vw;
+    min-width: min-content;
+    margin: 0 14vw;
 }
 
 header {
-    font-size: clamp(0.85em, 1.5vw, 1em);
+    grid-area: header;
     display: grid;
     grid-template-columns: max-content 1fr;
+    font-size: clamp(0.8em, 1.5vw, 0.9em);
     align-items: center;
-    margin: 0 3rem 0 3rem;
+    padding: min(1rem, 3vw) min(3rem, 3vw) min(1rem, 3vw) min(3rem, 3vw);
+    row-gap: 10px;
+    column-gap: 30px;
 }
-
 header nav {
-    justify-self: flex-end;
+    justify-self: self-end;
 }
-
-.dashboard-icon {
-    display: none;
+header .search-bar input {
+    width: max(100%, 30vw);
 }
-
 .user-profile {
-    justify-self: flex-end;
+    display: flex;
+    justify-self: self-end;
+}
+.user-img {
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+    align-items: center;
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+}
+.welcome-user {
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+    grid-template-areas:
+        "user-img greeting ..."
+        "user-img user-name user-tag";
+}
+.welcome-user .user-img {
+    grid-area: user-img;
+    display: flex;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+.welcome-user h3 {
+    grid-area: greeting;
+    align-self: self-end;
+}
+.welcome-user h1:first-of-type {
+    grid-area: user-name;
+}
+.welcome-user h1:last-of-type {
+    grid-area: user-tag
 }
 
+.dashboard-icon,
 #toggle-dashboard {
     display: none;
 }
-
 .dashboard {
-    grid-area: 1 / 1 / 3 / 1;
+    width: clamp(200px, 20vw, 300px);
+    grid-area: dashboard;
     background-color: rgb(92, 143, 255);
     padding: 1rem;
 }
-
 .dashboard > section:first-of-type {
     display: flex;
 }
 
 main {
-    font-size: clamp(0.85em, 1.5vw, 1em);
+    grid-area: main;
     display: grid;
-    grid-template-columns: 2.5fr 1fr;
+    grid-template-columns: 1fr max-content;
     grid-template-rows: 750px;  /* Fix height of side-panel */
+    grid-template-areas: 
+        "cards-container side-panel-container";
+    font-size: clamp(0.8em, 1.5vw, 0.9em);
     background-color: rgb(211, 211, 211);
-    padding: 20px;
+    padding: min(20px, 3vw);
     gap: 20px;
-    overflow: auto;
 }
 
 .cards-container {
+    grid-area: cards-container;
     min-height: 750px;
 }
-
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     grid-template-rows: min-content;
     grid-auto-rows: 1fr;
     min-height: 100%;
     gap: 18px;
 }
-
 .cards-grid h2:first-of-type {
-    grid-area: 1 / 1 / 1 / -1;
+    grid-row: 1 / 1;
+    grid-column: 1 / -1;
 }
-
 .card {
     background-color: white;
+    padding: 18px 26px;
 }
 
-.side-panel {
+.side-panel-container {
+    grid-area: side-panel-container;
+}
+.side-panel-grid {
     display: grid;
     grid-template-rows: max-content 1fr max-content 1fr;
+    grid-template-areas:
+        "announcements-header"
+        "announcements-content"
+        "trending-header"
+        "trending-content";
+    height: 100%;
     gap: 18px;
 }
-
 .side-panel-box {
     background-color: white;
+    padding: 18px 26px;
 }
 
+/*#################### */
 /* For smaller screens */
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
     .container {
         margin: 0;
     }
+}
+@media only screen and (max-width: 400px) {
+    .container {
+        margin: 0;
+    }
+    header {
+        gap: 10px;
+    }
+    .user-img {
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+    }
+    .user-profile p {
+        display: none;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        grid-template-areas:
+            "header header"
+            "main main";
+    }
+
     .dashboard {
         position: fixed;
         left: -100%;
@@ -113,43 +183,70 @@ main {
         transition: left 0.3s ease;
         z-index: 2;
     }
-    header {
-        grid-area: 1 / 1 / 1 / 3;
+
+    header .welcome-user {
+        font-size: clamp(0.6em, 1.5vw, 1em);
+        grid-template-areas:
+            "user-img greeting ...."
+            "user-img user-name ..."
+            "user-img user-tag ..."
     }
+
+    header .search-bar input {
+        width: max(150px, 30vw);
+    }
+
     .dashboard-icon {
         display: block;
         text-align: right;
     }
+
     .container {
         grid-template-columns: 1fr 1fr;
         box-shadow: 0px 0px 10px rgb(0, 0, 0);
     }
+
     main {
+        grid-template-columns: 1fr;
         grid-template-rows: min-content 1fr;
-        grid-area: 2 / 1 / -1 / -1;
+        grid-template-areas: 
+            "side-panel-container"
+            "cards-container";
     }
+
     .cards-container {
         height: min-content;
-        grid-area: 2 / 1 / 2 / -1;
     }
     .cards-grid {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
-    .side-panel {
+
+    .side-panel-container {
+        font-size: clamp(0.75em, 1.5vw, 1em);
+        text-align: center;
+    }
+    .side-panel-grid {
         display: grid;
         grid-auto-columns: 1fr 1fr;
         grid-template-rows: min-content 1fr;
-        grid-area: 1 / 1 / 1 / -1;
-        min-height: min-content;
-        height: min-content;
+        grid-template-areas:
+            "announcements-header trending-header"
+            "announcements-content trending-content";
         gap: 18px;
     }
-    .side-panel h2:first-of-type {
-        grid-area: 1 / 1 / 1 / 1;
+    .side-panel-grid h2:first-of-type {
+        grid-area: announcements-header;
     }
-    .side-panel h2:last-of-type {
-        grid-area: 1 / 2 / 1 / 2;
+    .side-panel-grid h2:last-of-type {
+        grid-area: trending-header;
     }
+    .side-panel-grid h2:first-of-type + div {
+        grid-area: announcements-content
+    }
+    .side-panel-grid h2:last-of-type + div {
+        grid-area: trending-content
+    }
+
     #toggle-dashboard:checked ~ .dashboard  {
         left: 0; /* Slide the dashboard into view */
         visibility: visible;
