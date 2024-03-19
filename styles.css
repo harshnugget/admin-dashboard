@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: auto;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -21,7 +22,9 @@ h1,h2,h3,h4,h5,h6 {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.637);
     height: 100vh;
     min-width: min-content;
-    margin: 0 14vw;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 header {
@@ -32,27 +35,71 @@ header {
     align-items: center;
     padding: min(1rem, 3vw) min(3rem, 3vw) min(1rem, 3vw) min(3rem, 3vw);
     row-gap: 10px;
-    column-gap: 30px;
+    column-gap: 20px;
+    box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+    z-index: 1;
 }
 header nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-self: self-end;
 }
+header nav button {
+    width: calc(70px + 1.3vw);
+    height: 38px;
+    margin: min(1em, 1vw);
+    border-radius: 40px;
+    border-style: none;
+    justify-self: self-end;
+    background-color: rgb(92, 143, 255);
+    font-weight: bold;
+    color: white;
+
+}
+header .search-bar {
+    display: flex;
+}
+header .search-bar svg {
+    height: 25px;
+    width: 25px;
+    min-width: 25px;
+    margin: 0 clamp(5px, 1.2vw, 30px) 0 0;
+}
 header .search-bar input {
+    background-color: rgb(228, 228, 228);
+    height: 25px;
+    border-style: none;
+    border-radius: 50px;
+    outline-color: rgb(180, 180, 180);
+    padding: 0 10px;
     width: max(100%, 30vw);
 }
 .user-profile {
     display: flex;
     justify-self: self-end;
+    align-items: center;
+}
+.user-profile svg {
+    height: 25px;
+    width: 25px;
+    min-width: 25px;
+    margin: 0 clamp(12px, 1.2vw, 30px);
 }
 .user-img {
     display: flex;
     justify-content: center;
-    background-color: gray;
+    align-self: center;
+    justify-self: self-end;
+    background-image: url('images/user-profile-img.svg'); /* Path to your SVG image */
+    background-size: contain;
+    background-repeat: no-repeat;
     align-items: center;
-    width: 50px;
-    min-width: 50px;
-    height: 50px;
+    width: 45px;
+    min-width: 45px;
+    height: 45px;
+    margin-right: clamp(8px, 1vw, 1.5vw);
 }
+
 .welcome-user {
     display: grid;
     grid-template-columns: max-content max-content max-content;
@@ -70,44 +117,91 @@ header .search-bar input {
 .welcome-user h3 {
     grid-area: greeting;
     align-self: self-end;
+    font-size: clamp(0.9rem, 2.5vw, 1.5rem);
 }
 .welcome-user h1:first-of-type {
     grid-area: user-name;
+    font-size: clamp(1rem, 2.5vw, 2rem);
 }
 .welcome-user h1:last-of-type {
-    grid-area: user-tag
+    grid-area: user-tag;
+    font-size: clamp(1rem, 2.5vw, 2rem);
 }
 
 .dashboard-icon,
 #toggle-dashboard {
     display: none;
 }
+.dashboard-icon svg {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    fill: rgb(97, 97, 97);
+}
+.dashboard svg {
+    fill: white; /* Change color to desired color */
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+}
 .dashboard {
-    width: clamp(200px, 20vw, 300px);
+    width: clamp(150px, 15vw, 300px);
+    min-width: max-content;
     grid-area: dashboard;
     background-color: rgb(92, 143, 255);
-    padding: 1rem;
+    font-weight: 600;
+    color: white;
+    padding: 2rem 1.1rem 1rem 1rem;
+    z-index: 2;
+    font-size: clamp(1rem, 1vw, 1.2rem);
 }
-.dashboard > section:first-of-type {
+.dashboard section {
     display: flex;
+    align-items: center;
+}
+.dashboard section svg {
+    width: 40px;
+    height: 40px;
+    max-width: 40px;
+    margin-right: 5px;
+}
+.dashboard ul {
+    padding: 0 5px;
+}
+.dashboard ul:last-child {
+    margin-top: 4rem;
+}
+.dashboard ul li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 20px 0;
+}
+.dashboard ul li svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
 }
 
 main {
     grid-area: main;
     display: grid;
     grid-template-columns: 1fr max-content;
-    grid-template-rows: 750px;  /* Fix height of side-panel */
+    grid-template-rows: 700px;  /* Fix height of side-panel */
     grid-template-areas: 
         "cards-container side-panel-container";
-    font-size: clamp(0.8em, 1.5vw, 0.9em);
+    font-size: clamp(0.8em, 2vw, 0.9em);
     background-color: rgb(211, 211, 211);
     padding: min(20px, 3vw);
-    gap: 20px;
+    padding-bottom: 20px;
+}
+main h2 {
+    margin: 8px;
 }
 
 .cards-container {
     grid-area: cards-container;
-    min-height: 750px;
+    min-height: 700px;
 }
 .cards-grid {
     display: grid;
@@ -115,7 +209,6 @@ main {
     grid-template-rows: min-content;
     grid-auto-rows: 1fr;
     min-height: 100%;
-    gap: 18px;
 }
 .cards-grid h2:first-of-type {
     grid-row: 1 / 1;
@@ -124,6 +217,12 @@ main {
 .card {
     background-color: white;
     padding: 18px 26px;
+    margin: 0 9px 18px 9px;
+    border-radius: 10px;
+    border-left: solid;
+    border-width: 10px;
+    border-color: orange;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
 }
 
 .side-panel-container {
@@ -138,34 +237,74 @@ main {
         "trending-header"
         "trending-content";
     height: 100%;
-    gap: 18px;
+    max-width: 300px;
 }
 .side-panel-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: clamp(6px, 1vw, 10px);
+    align-items: center;
     background-color: white;
     padding: 18px 26px;
+    margin: 0 9px 18px 9px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
 }
+.side-panel-box p {
+    margin: 0;
+}
+.announcements .separator {
+    background-color: black;
+    height: 1px;
+    width: 100%;
+    margin-bottom: 14.4px;
+}
+
+
 
 /*#################### */
 /* For smaller screens */
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1600px) {
     .container {
         margin: 0;
     }
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 430px) {
     .container {
         margin: 0;
     }
     header {
         gap: 10px;
     }
-    .user-img {
-        width: 40px;
-        min-width: 40px;
-        height: 40px;
+    .welcome-user .user-img {
+        width: 50px;
+        height: 50px;
     }
-    .user-profile p {
+    .welcome-user h3 {
+        font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+    }
+    .welcome-user h1:first-of-type {
+        font-size: 0.9rem;
+    }
+    .welcome-user h1:last-of-type {
+        font-size: 0.9rem;
+    }
+    .user-img {
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+    }
+    .user-profile h4 {
         display: none;
+    }
+    header nav {
+        grid-area: 2 / 1 / 2 / -1;
+        justify-self: center;
+        gap: 20px;
+    }
+    header nav button {
+        height: 30px;
     }
 }
 @media only screen and (max-width: 768px) {
@@ -181,7 +320,6 @@ main {
         height: 100vh;
         width: max(150px, 30vw);
         transition: left 0.3s ease;
-        z-index: 2;
     }
 
     header .welcome-user {
@@ -199,6 +337,7 @@ main {
     .dashboard-icon {
         display: block;
         text-align: right;
+        grid-column-end: -1;
     }
 
     .container {
@@ -222,7 +361,7 @@ main {
     }
 
     .side-panel-container {
-        font-size: clamp(0.75em, 1.5vw, 1em);
+        font-size: clamp(0.8em, 2vw, 1em);
         text-align: center;
     }
     .side-panel-grid {
@@ -232,7 +371,7 @@ main {
         grid-template-areas:
             "announcements-header trending-header"
             "announcements-content trending-content";
-        gap: 18px;
+        max-width: initial;
     }
     .side-panel-grid h2:first-of-type {
         grid-area: announcements-header;
