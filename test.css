@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    --card-min-width: 250px;
+    --card-max-width: 500px;
+    --card-margin: 20px;
+    --symbol-size-medium: 25px;
+    --font-small: 0.9rem;
+    --font-medium: 1rem;
+}
+
+div.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: min-content 1fr;
+    column-gap: var(--card-margin);
+}
+
+div.card-grid {
+    grid-row: 2 / -1;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+    grid-auto-rows: 1fr;    /* Sets all cards to same height */
+    column-gap: var(--card-margin);
+}
+
+div.card {
+    display: flex;
+    flex-direction: column;
+
+    width: fit-content;
+    max-width: var(--card-max-width);
+    
+    font-size: var(--font-medium);
+}
+
+div.card-symbols {
+    align-self: flex-end;
+    margin-top: auto;
+}
+
+div.card svg {
+    width: var(--symbol-size-medium);
+}
+
+div.side-panel-grid {
+    grid-row: 1 / 3;
+    grid-column: 2 / -1;
+
+    display: grid;
+    column-gap: var(--card-margin);
+    
+    height: min-content;
+    max-width: 300px;
+}
+div.side-panel-content {
+    display: flex;
+    flex-direction: column;
+    
+    font-size: var(--font-small);
+    gap: 1rem;
+}
+
+div.card,
+div.side-panel-content {
+    border-style: solid;
+    border-width: 1px;
+
+    padding: 1.2rem 1rem;
+    margin-bottom: var(--card-margin);
+}
+
+@media only screen and (max-width: 768px) {
+    div.main-content {
+        display: block;
+    }
+    div.side-panel-grid {
+        margin: 0 auto; /* Centres side-panel cards */
+    }
+}
