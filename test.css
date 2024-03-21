@@ -10,15 +10,120 @@
     --symbol-size-medium: 25px;
     --font-small: 0.9rem;
     --font-medium: 1rem;
+    --default-padding: 1rem;
 }
 
+body {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: min-content;
+    grid-template-areas: 
+        "dashboard header"
+        "dashboard main";
 
+    height: 100vh;
+    max-width: 1600px;
+    
+    margin: 0 auto;
+
+    border-style: solid;
+    border-width: 1px;
+}
+
+/* ############ */
+/* DASHBOARD */
+div.dashboard {
+    grid-area: dashboard;
+
+    height: 100%;
+
+    padding: var(--default-padding);
+
+    border-right: solid;
+    border-width: 1px;
+
+    z-index: 2;
+
+    transition: left 0.3s ease;
+}
+
+label[for="toggle-dashboard"],
+#toggle-dashboard {
+    display: none;  /* Hide the checkbox */
+    width: 40px;
+}
+/* DASHBOARD */
+/* ############ */
+
+
+/* ############ */
+/* HEADER */
+div.header {
+    grid-area: header;
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: dense;
+    gap: var(--card-margin);
+
+    padding: var(--default-padding);
+
+    border-bottom: solid;
+    border-width: 1px;
+}
+
+div.header * {
+    align-self: center;
+}
+
+div.header svg {
+    height: var(--symbol-size-medium);
+    min-width: var(--symbol-size-medium);
+}
+
+div.header .search-bar {
+    position: relative;
+
+    display: flex;
+}
+
+div.header .search-bar input {
+    height: calc(var(--symbol-size-medium) + 5px);
+    width: 100%;
+}
+
+div.header .user-profile {
+    display: flex;
+    justify-self: end;
+}
+
+div.header .greeting {
+    grid-column: 1 / 1;
+}
+
+div.header nav {
+    grid-column: 2 / -1;
+    justify-self: end;
+}
+/* HEADER */
+/* ############ */
+
+
+/* ############ */
 /* MAIN CONTENT */
 div.main-content {
+    grid-area: main;
+
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: min-content 1fr;
     column-gap: var(--card-margin);
+
+    height: min-content;
+
+    padding: var(--default-padding);
+
+    border-width: 1px;
 }
 
 div.news-panel-grid {
@@ -76,12 +181,46 @@ div.card svg {
     width: var(--symbol-size-medium);
 }
 /* MAIN CONTENT */
+/* ############ */
 
+
+/* ############ */
+/* SMALLER SCREENS */
 @media only screen and (max-width: 768px) {
     div.main-content {
         display: block;
     }
-    div.side-panel-grid {
-        margin: 0 auto; /* Centres side-panel cards */
+    div.news-panel-grid {
+        margin: 0 auto; /* Centres news-panel cards */
+    }
+    div.dashboard {
+        position: fixed;
+        left: -100%;    /* Hides dashboard off-screen */
+    }
+    label[for="toggle-dashboard"] {
+        display: block;
+        justify-self: end;
+    }
+    div.dashboard:has(#toggle-dashboard:checked) {
+        left: 0; /* Slide the dashboard into view */
+        visibility: visible;
+    }
+    
+    div.dashboard:has(#toggle-dashboard:not(:checked)) {
+        left: -100%; /* Slide the dashboard out of view */
+        visibility: visible;
+    }
+    div.header nav {
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+    div.header .search-bar svg {
+        position: absolute; /* Position the svg inside of the search bar */
+
+        /* Vertically center the svg inside of the search bar */
+        top: 50%;
+        transform: translateY(-50%);
     }
 }
+/* SMALLER SCREENS */
+/* ############ */
