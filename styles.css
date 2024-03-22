@@ -14,8 +14,8 @@
     --symbol-size-medium: 25px;
     --default-padding: clamp(0.7rem, 2vw, 1.2rem);
 
-    --primary-bg-color: #f43f5e;
-    --secondary-bg-color: #ffecee;
+    --primary-bg-color: #ec4e68;
+    --secondary-bg-color: #fff0f1;
 }
 
 .container {
@@ -39,6 +39,7 @@
 /* Default image for user profiles */
 .user-img {
     background-image: url("images/user-profile-img.svg");
+    background-repeat: no-repeat;
 }
 
 /* ############ */
@@ -138,27 +139,34 @@ div.header .search-bar {
     position: relative;
     
     display: flex;
+
+    max-width: 700px;
 }
 
 div.header .search-bar input {
     height: calc(var(--symbol-size-medium) + 5px);
     width: 100%;
-    max-width: 700px;
 
     padding: 0 10px;
 
     border-radius: 16px;
-    border-style: solid;
-    border-color: #ffd8dc;
+    border-style: none;
 
-    background-color: var(--secondary-bg-color);
-    outline-color: var(--primary-bg-color);
+    background-color: #e2e2e2;
 }
+
+div.header .search-bar input:focus-visible {
+    outline-color: var(--primary-bg-color);
+    outline-width: 1px;
+    outline-style: solid;
+}   
 
 div.header .user-profile {
     display: flex;
     justify-self: end;
 
+    width: max-content;
+    
     margin-right: clamp(0px, 2vw, 20px);
 }
 
@@ -291,7 +299,7 @@ div.news-panel-content {
     font-size: 0.8rem;
 }
 
-div.news-panel-content.trending> div {
+div.news-panel-content.trending > div {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -416,6 +424,10 @@ div.news-panel-content p {
     div.header .search-bar input {
         padding-left: calc(var(--symbol-size-medium) + 3px);
         margin: 0;
+    }
+
+    div.header .user-profile {
+        width: min-content;
     }
 }
 /* SMALLER SCREENS */
