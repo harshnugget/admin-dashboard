@@ -253,7 +253,7 @@ div.header .user-profile .user-name {
 }
 
 div.header .user-profile .notification-bell {
-    position: relative; /* Added */
+    position: relative;
 
     display: flex;
 
@@ -465,7 +465,7 @@ div.card {
 }
 
 div.card:hover {
-    transform: scale(1.03); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    transform: scale(1.03);
 }
 
 div.card-symbols {
