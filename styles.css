@@ -11,11 +11,41 @@
     --card-min-width: 250px;
     --card-max-width: 500px;
     --card-margin: 20px;
-    --symbol-size-medium: 25px;
+    --symbol-size-medium: 26px;
     --default-padding: clamp(0.7rem, 2vw, 1.2rem);
-
+    
     --primary-bg-color: #ec4e68;
     --secondary-bg-color: #fff0f1;
+
+    --primary-bg-color-dark: #2d001d;
+    --secondary-bg-color-dark: #222222;
+    --header-bg-color-dark: #241d21;
+    --cards-bg-color-dark: #3d2c41;
+}
+
+body:has(#toggle-dark-mode:checked) {
+    background-color: black;
+}
+
+body:has(#toggle-dark-mode:checked) p,
+body:has(#toggle-dark-mode:checked) svg {
+    color: white;
+    fill: white;
+}
+
+label[for="toggle-dark-mode"] {
+    aspect-ratio: 1 / 1;
+    width: 35px;
+
+    background-image: url("images/dark_mode.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    cursor: pointer;
+}
+
+body:has(#toggle-dark-mode:checked) label[for="toggle-dark-mode"] {
+    background-image: url("images/light_mode.svg");
 }
 
 .container {
@@ -31,19 +61,32 @@
     
     margin: 0 auto;
 
-    box-shadow: 0px 0px 8px rgba(0,0,0,0.4);
-
     background-color: var(--secondary-bg-color);
+
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.4);
+}
+
+body:has(#toggle-dark-mode:checked) .container {
+    background: linear-gradient(to left, black, #222222);
+    color: white;
+
+    box-shadow: none;
 }
 
 /* Default image for user profiles */
 .user-img {
     background-image: url("images/user-profile-img.svg");
     background-repeat: no-repeat;
+
+    cursor: pointer;
 }
 
 /* ############ */
 /* DASHBOARD */
+#toggle-dark-mode {
+    display: none;
+}
+
 div.dashboard {
     grid-area: dashboard;
 
@@ -64,6 +107,12 @@ div.dashboard {
     fill: white;
 }
 
+body:has(#toggle-dark-mode:checked) .dashboard {
+    background: linear-gradient(to right, black, var(--primary-bg-color-dark));
+    border-right-style: inset;
+    border-color: white;
+}
+
 div.dashboard .dashboard-header {
     display: flex;
     align-items: center;
@@ -79,6 +128,8 @@ div.dashboard ul li {
     font-size: 1.2rem;
 
     margin: 16px 0 0 5px;
+
+    cursor: pointer;
 }
 
 div.dashboard ul svg {
@@ -87,19 +138,34 @@ div.dashboard ul svg {
 }
 
 div.dashboard h1:first-of-type {
-    margin-right: clamp(0px, 5vw, 100px);   /* Controls width of dashboard */
+    margin-right: clamp(0px, 5vw, 80px);   /* Controls width of dashboard */
 }
 
 label[for="toggle-dashboard"],
 #toggle-dashboard {
+    grid-column-end: -1;
+    grid-row-start: 3;
+
     display: none;  /* Hide checkbox and label on bigger screens */
 
     aspect-ratio: 1 / 1;
     min-height: 50px;   /* Size of the toggle dashboard icon */
+
+    fill: var(--primary-bg-color);
+    cursor: pointer;
+    user-select: none;
+}
+
+label[for="toggle-dashboard"] svg:hover {
+    filter: brightness(1.4);
 }
 
 label[for="toggle-dashboard"] svg {
     min-height: 100%;
+}
+
+body:has(#toggle-dark-mode:checked) label[for="toggle-dashboard"] svg:hover {
+    filter: brightness(0.7);
 }
 
 /* DASHBOARD */
@@ -122,6 +188,11 @@ div.header {
     box-shadow: 0px 4px 15px -5px rgba(0,0,0,0.4);
 
     z-index: 2;
+}
+
+body:has(#toggle-dark-mode:checked) div.header {
+    background: linear-gradient(to left, black, var(--header-bg-color-dark));
+    color: white;
 }
 
 div.header * {
@@ -156,7 +227,7 @@ div.header .search-bar input {
 }
 
 div.header .search-bar input:focus-visible {
-    outline-color: var(--primary-bg-color);
+    outline-color: #b8b8b8;
     outline-width: 1px;
     outline-style: solid;
 }   
@@ -173,18 +244,53 @@ div.header .user-profile {
 div.header .user-profile .user-img {
     aspect-ratio: 1 / 1;
     width: 40px;
+    
+    margin: 0 clamp(8px, 1.5vw, 10px) 0 clamp(8px, 1.5vw, 25px);
+}
+
+div.header .user-profile .user-name {
+    cursor: pointer;
+}
+
+div.header .user-profile .notification-bell {
+    position: relative; /* Added */
+
+    display: flex;
+
+    width: min-content;
+    height: min-content;
+
+    cursor: pointer;
+}
+
+.user-profile .notification-bell:hover::after {
+    content: '';
+    position: absolute;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.15);
+    z-index: -1;
+}
+
+body:has(#toggle-dark-mode:checked) .notification-bell:hover::after {
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 div.header .search-bar input {
     margin: 0 clamp(8px, 1.5vw, 16px);
 }
 
-div.header .user-profile .user-img {
-    margin: 0 clamp(8px, 1.5vw, 25px);
+body:has(#toggle-dark-mode:checked) .search-bar input {
+    background-color: grey;
+    outline-color: white;
 }
 
 div.header .user-profile h4 {
-    font-size: clamp(0.9rem, 2vw, 1rem)
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 div.header .greeting {
@@ -234,7 +340,7 @@ div.header nav button {
     justify-self: center;
 
     width: min(100px, calc(3vw + 80px));
-    height: 35px;
+    height: max-content;
 
     padding: 8px;
 
@@ -245,6 +351,12 @@ div.header nav button {
     
     color: white;
     background-color: var(--primary-bg-color);
+
+    cursor: pointer;
+}
+
+body:has(#toggle-dark-mode:checked) div.header nav button {
+    background-color: #2d001d;
 }
 /* HEADER */
 /* ############ */
@@ -252,7 +364,6 @@ div.header nav button {
 
 /* ############ */
 /* MAIN CONTENT */
-
 div.main-content {
     grid-area: main;
 
@@ -310,6 +421,10 @@ div.news-panel-content .user-img {
     width: 40px;
 }
 
+div.news-panel-content h4 {
+    cursor: pointer;
+}
+
 div.card,
 div.news-panel-content {
     border-radius: 8px;
@@ -343,6 +458,14 @@ div.card {
     border-left-style: solid;
     border-left-width: 8px;
     border-left-color: rgb(172, 135, 182);
+
+    transition: transform .2s;
+
+    cursor: pointer;
+}
+
+div.card:hover {
+    transform: scale(1.03); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
 div.card-symbols {
@@ -358,10 +481,39 @@ div.card svg {
     width: var(--symbol-size-medium);
 }
 
+div.card svg:hover {
+    fill: rgb(115, 115, 115);
+}
+
+body:has(#toggle-dark-mode:checked) div.card svg:hover {
+    fill: rgb(160, 160, 160);
+}
+
 div.card p,
 div.news-panel-content p {
     font-weight: 500;
-    color: grey;
+    color: rgb(128, 128, 128);
+}
+
+body:has(#toggle-dark-mode:checked) div.card {
+    box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+body:has(#toggle-dark-mode:checked) div.card,
+body:has(#toggle-dark-mode:checked) div.news-panel-content {
+    background-color: #3d2c41;
+    color: white;
+}
+
+/* Change colours of other user profile images | Used SVG to CSS converter for url's */
+div.news-panel-content div:nth-of-type(1) .user-img {
+    background-image:url('data:image/svg+xml,<%3Fxml version="1.0" encoding="UTF-8"%3F><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 904 904"><g id="objects"><g><path fill="%231e81b0" d="m904,452c0,143.23-66.62,270.9-170.57,353.71-77.21,61.53-175.03,98.29-281.43,98.29s-204.22-36.76-281.43-98.29C66.62,722.9,0,595.23,0,452,0,202.37,202.37,0,452,0s452,202.37,452,452Z"/><circle fill="%238fc0d8" cx="452" cy="351" r="190"/><path fill="%238fc0d8" d="m733.43,805.71c-77.21,61.53-175.03,98.29-281.43,98.29s-204.22-36.76-281.43-98.29c36.55-120.78,148.72-208.71,281.43-208.71s244.88,87.93,281.43,208.71Z"/></g></g></svg>');
+}
+div.news-panel-content div:nth-of-type(3) .user-img {
+    background-image:url('data:image/svg+xml,<%3Fxml version="1.0" encoding="UTF-8"%3F><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 904 904"><g id="objects"><g><path fill="%23ff0004" d="m904,452c0,143.23-66.62,270.9-170.57,353.71-77.21,61.53-175.03,98.29-281.43,98.29s-204.22-36.76-281.43-98.29C66.62,722.9,0,595.23,0,452,0,202.37,202.37,0,452,0s452,202.37,452,452Z"/><circle fill="%23ff8082" cx="452" cy="351" r="190"/><path fill="%23ff8082" d="m733.43,805.71c-77.21,61.53-175.03,98.29-281.43,98.29s-204.22-36.76-281.43-98.29c36.55-120.78,148.72-208.71,281.43-208.71s244.88,87.93,281.43,208.71Z"/></g></g></svg>');
+}
+div.news-panel-content div:nth-of-type(4) .user-img {
+    background-image:url('data:image/svg+xml,<%3Fxml version="1.0" encoding="UTF-8"%3F><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 904 904"><g id="objects"><g><path fill="%23ffb300" d="m904,452c0,143.23-66.62,270.9-170.57,353.71-77.21,61.53-175.03,98.29-281.43,98.29s-204.22-36.76-281.43-98.29C66.62,722.9,0,595.23,0,452,0,202.37,202.37,0,452,0s452,202.37,452,452Z"/><circle fill="%23ffd980" cx="452" cy="351" r="190"/><path fill="%23ffd980" d="m733.43,805.71c-77.21,61.53-175.03,98.29-281.43,98.29s-204.22-36.76-281.43-98.29c36.55-120.78,148.72-208.71,281.43-208.71s244.88,87.93,281.43,208.71Z"/></g></g></svg>');
 }
 /* MAIN CONTENT */
 /* ############ */
@@ -432,3 +584,4 @@ div.news-panel-content p {
 }
 /* SMALLER SCREENS */
 /* ############ */
+
