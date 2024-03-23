@@ -402,10 +402,19 @@ div.news-panel-grid {
     max-width: 300px;
 }
 
+div.news-panel {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}
+
 div.news-panel-content {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     gap: 1rem;
+
+    flex: 1;
     
     font-size: 0.85rem;
 }
