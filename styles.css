@@ -57,6 +57,7 @@ body:has(#toggle-dark-mode:checked) label[for="toggle-dark-mode"] {
         "dashboard main";
 
     min-height: 100vh;
+    min-width: min-content;
     max-width: 1600px;
     
     margin: 0 auto;
