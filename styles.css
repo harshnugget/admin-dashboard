@@ -407,7 +407,7 @@ div.news-panel-content {
     flex-direction: column;
     gap: 1rem;
     
-    font-size: 0.8rem;
+    font-size: 0.85rem;
 }
 
 div.news-panel-content.trending > div {
