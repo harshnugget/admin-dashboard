@@ -220,6 +220,7 @@ div.header .search-bar input {
     width: 100%;
 
     padding: 0 10px;
+    margin: 0 clamp(8px, 1.5vw, 16px);
 
     border-radius: 16px;
     border-style: none;
@@ -231,7 +232,12 @@ div.header .search-bar input:focus-visible {
     outline-color: #b8b8b8;
     outline-width: 1px;
     outline-style: solid;
-}   
+}  
+
+body:has(#toggle-dark-mode:checked) .search-bar input {
+    background-color: grey;
+    outline-color: white;
+}
 
 div.header .user-profile {
     display: flex;
@@ -279,15 +285,6 @@ div.header .user-profile .notification-bell {
 
 body:has(#toggle-dark-mode:checked) .notification-bell:hover::after {
     background-color: rgba(255, 255, 255, 0.15);
-}
-
-div.header .search-bar input {
-    margin: 0 clamp(8px, 1.5vw, 16px);
-}
-
-body:has(#toggle-dark-mode:checked) .search-bar input {
-    background-color: grey;
-    outline-color: white;
 }
 
 div.header .user-profile h4 {
